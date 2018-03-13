@@ -15,7 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from core.views import index
+from categories.views import category_details
+from questions.views import question_details
+from login.views import login
+from signup.views import signup
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', index),
+    url(r'^categories/(\d+)$', category_details),
+    url(r'^questions/(\d+)$', question_details),
+    url(r'^login/', login),
+    url(r'^signup/', signup),
 ]

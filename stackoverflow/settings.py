@@ -39,7 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
     'likes.apps.LikesConfig',
+    'categories.apps.CategoriesConfig',
+    'login.apps.LoginConfig',
+    'signup.apps.SignupConfig',
 ]
+
+AUTH_USER_MODEL = 'core.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
