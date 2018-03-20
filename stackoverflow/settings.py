@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'likes.apps.LikesConfig',
     'categories.apps.CategoriesConfig',
+    'questions.apps.QuestionsConfig',
 ]
 
 AUTH_USER_MODEL = 'core.User'

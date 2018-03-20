@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 
 def index(request):
-    return HttpResponse('This is homepage')
+    return render(request, "core/index.html", {})
 
 def signup(request):
-    new_user = request.GET.get('new_user')
-    return HttpResponse('Hello {}'.format(new_user))
+    return render(request, "core/signup.html", {})
 
 def login(request):
-    user_name = request.GET.get('user_name')
-    return HttpResponse('Login for {}'.format(user_name))
+    return render(request, "core/login.html", {})
+
+def logout(request):
+    return render(request, "core/logout.html", {})
+
+def profile(request):
+    return render(request, "core/profile.html", {})
