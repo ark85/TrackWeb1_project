@@ -1,15 +1,12 @@
 {% extends 'core/base.html' %}
-{% block title %}Login{% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block content %}
     <div>
         <form method="post" action="">
             {% csrf_token %}
-            {{ form }}
-            <button>login</button>
+            {{ form.as_p }}
+            <button>Register</button>
         </form>
     </div>
-
-    <br>
-    <a href="{% url "core:register" %}">Register</a>
 {% endblock content %}

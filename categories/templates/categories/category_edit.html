@@ -1,0 +1,20 @@
+{% extends "core/base.html"%}
+
+{% block title %}SOF Categories{% endblock %}
+
+{% block content %}
+
+    <h2>Edit category: {{ category.name }}</h2>
+
+    {% if category.author == user %}
+        <a href="{% url "categories:category_details" category_id=category.id %}">Back to details</a>
+    {% endif %}
+
+    <br>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Edit">
+    </form>
+{% endblock %}

@@ -3,6 +3,24 @@
 {% block title %}SOF Categories{% endblock %}
 
 {% block content %}
+
+    <a href="{% url "core:logout" %}">Logout</a>
+
+    <br>
+
+    <a href="{% url "categories:category_create" %}">Create new category</a>
+
+    <br>
+    <br>
+
+    <form action="" method="get">
+        {{ categories_form }}
+        <button>Go</button>
+    </form>
+
+    <br>
+    <br>
+
     {% for category in categories %}
         <div>
             <a href="{% url "categories:category_details" category_id=category.id %}">

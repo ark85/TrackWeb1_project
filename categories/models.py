@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.conf import settings
 
 
 class Category(models.Model):
@@ -10,6 +11,7 @@ class Category(models.Model):
         max_length=255,
         verbose_name='Category name'
     )
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
 
     def __unicode__(self):
         return self.name

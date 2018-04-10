@@ -1,10 +1,10 @@
 from django.conf.urls import url
-from core.views import index, login, logout, signup, profile
+from core.views import index, Login, Logout, Register, profile
 
 urlpatterns = [
     url(r'^$', index),
-    url(r'^login/$', login),
-    url(r'^logout/$', logout),
-    url(r'^signup/$', signup),
-    url(r'^profile/$', profile),
+    url(r'^login/$', Login.as_view(), name='login'),
+    url(r'^logout/$', Logout.as_view(), name='logout'),
+    url(r'^register/$', Register.as_view(), name='register'),
+    url(r'^profile/$', profile, name='profile'),
 ]
