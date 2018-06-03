@@ -37,10 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'core.apps.CoreConfig',
-    'likes.apps.LikesConfig',
     'categories.apps.CategoriesConfig',
     'questions.apps.QuestionsConfig',
+    'answers.apps.AnswersConfig',
 ]
 
 AUTH_USER_MODEL = 'core.User'
@@ -131,3 +132,5 @@ STATIC_URL = '/static/'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 REGISTER_URL = 'register'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from models import Question
 from django.views.generic import UpdateView, CreateView
@@ -39,6 +40,7 @@ class QuestionEdit(UpdateView):
     context_object_name = 'question'
     template_name = 'questions/question_edit.html'
 
+    @login_required
     def get_queryset(self):
         queryset = super(QuestionEdit, self).get_queryset()
         queryset = queryset.filter(author=self.request.user)
@@ -49,10 +51,18 @@ class QuestionEdit(UpdateView):
 
 
 class QuestionCreate(CreateView):
+
+    @login_required
+    def dispatch(self, request, *args, **kwargs):
+        # if user auth
+        return super(QuestionCreate, self).dispatch(request, *args, **kwargs)
+
     model = Question
     fields = 'name', 'categories'
     context_object_name = 'question'
     template_name = 'questions/question_create.html'
+
+    #
 
     def get(self, request):
         form = self.get_form()

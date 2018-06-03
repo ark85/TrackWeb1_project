@@ -11,6 +11,10 @@ class Question(models.Model):
         max_length=255,
         verbose_name='Question name'
     )
+    content = models.CharField(
+        max_length=500,
+        verbose_name='Question content'
+    )
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='questions',
@@ -18,14 +22,23 @@ class Question(models.Model):
     )
     categories = models.ManyToManyField(
         Category,
+        # Update faster than remove
         blank=True,
         related_name='questions',
         verbose_name='Question\'s categories'
+    )
+    likes = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        related_name="question_likes"
     )
     is_archive = models.BooleanField(
         default=False,
         verbose_name='Question in archive'
     )
+
+    # Add answers and comments
+
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

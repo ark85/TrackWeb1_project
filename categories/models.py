@@ -11,7 +11,9 @@ class Category(models.Model):
         max_length=255,
         verbose_name='Category name'
     )
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+
+    # Create author for old categories --- Done
 
     def __unicode__(self):
         return self.name
