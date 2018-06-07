@@ -40,7 +40,7 @@ class QuestionEdit(UpdateView):
     context_object_name = 'question'
     template_name = 'questions/question_edit.html'
 
-    @login_required
+    # @login_required()
     def get_queryset(self):
         queryset = super(QuestionEdit, self).get_queryset()
         queryset = queryset.filter(author=self.request.user)
@@ -52,7 +52,7 @@ class QuestionEdit(UpdateView):
 
 class QuestionCreate(CreateView):
 
-    @login_required
+    # @login_required
     def dispatch(self, request, *args, **kwargs):
         # if user auth
         return super(QuestionCreate, self).dispatch(request, *args, **kwargs)

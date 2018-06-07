@@ -9,8 +9,9 @@
 
 {% block content %}
 
-    <a href="{% url "questions:question_create" %}">Create new question</a>
-
+    <div style="padding-top:5000px">
+        <a href="{% url "questions:question_create" %}">Create new question</a>
+    </div>
     <br>
     <br>
 
@@ -30,7 +31,7 @@
                             {{ question.name|default:'no name' }}
                         </a>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body col-2 text-truncate">
                         <p>
                             {{ question.content|default:'no name' }}
                         </p>

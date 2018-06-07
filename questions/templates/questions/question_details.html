@@ -2,6 +2,10 @@
 
 {% block title %}SOF Question{% endblock %}
 
+{% block username %}
+    {{ request.user.username }}
+{% endblock %}
+
 {% block content %}
     <h2>Question: {{ question.name }}</h2>
     <a href="{% url "questions:questions" %}">All questions</a>
@@ -25,6 +29,15 @@
             <a href="{% url "categories:category_details" category_id=category.id %}">
                 {{ category.name|default:"no name" }}
             </a>
+        </div>
+    {% endfor %}
+
+
+    <h4>Answers:</h4>
+    {% for answer in question.answers.all %}
+        <div>
+            {{ answer.content }}<br>
+            {{ answer.created }}
         </div>
     {% endfor %}
 

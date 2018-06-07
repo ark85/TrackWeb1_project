@@ -1,11 +1,17 @@
 {% extends "core/base.html"%}
+{% load crispy_forms_tags %}
 
 {% block title %}SOF Categories{% endblock %}
 
+{% block username %}
+    {{ request.user.username }}
+{% endblock %}
+
 {% block content %}
 
-    <a href="{% url "core:logout" %}">Logout</a>
-
+    <div style="padding-top: 200px">
+        <a href="{% url "core:logout" %}">Logout</a>
+    </div>
     <br>
 
     <a href="{% url "categories:category_create" %}">Create new category</a>
@@ -14,8 +20,8 @@
     <br>
 
     <form action="" method="get">
-        {{ categories_form }}
-        <button>Go</button>
+        {{ categories_form | crispy }}
+        <button class="btn">Go</button>
     </form>
 
     <br>

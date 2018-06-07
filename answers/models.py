@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.conf import settings
-from questions.models import Question
 
 # Create your models here.
 
@@ -19,11 +18,6 @@ class Answer(models.Model):
         settings.AUTH_USER_MODEL,
         related_name='answers',
         verbose_name='Author'
-    )
-    question = models.ForeignKey(
-        Question,
-        related_name='question',
-        verbose_name='Question'
     )
     likes = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
