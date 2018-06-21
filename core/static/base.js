@@ -10,20 +10,13 @@ $(document).ready(
 
 
         $("#category-new-a").click(function () {
+            $("#category-new-content").load(this.href);
+            $("#category-new-modal").popover('show');
+            return false;
+        });
 
-
-            // $("#category-new-modal").popover('show');
-            // $("#category-new-modal").show();
-            // $("#category-new-content").load(this.href);
-            $('*[data-url]').hover(function() {
-                var e = $(this);
-                e.off('hover');
-                $.get(e.data('url'), function(d) {
-                    e.popover({
-                        content: d
-                    }).popover('show');
-                });
-            });
+        $(".submit-creation").on('click', function () {
+            $("#category-new-modal").popover('hide');
             return false;
         });
 
