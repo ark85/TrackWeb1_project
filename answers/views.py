@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from models import Answer
 from django.views.generic import UpdateView, CreateView
 from forms import AnswerViewsForm
+from questions.views import question_views
 
 
 def answer_details(request, answer_id):
@@ -35,10 +36,9 @@ def answer_views(request):
 class AnswerEdit(UpdateView):
     model = Answer
     fields = 'content'
-    context_object_name = 'answre'
+    context_object_name = 'answer'
     template_name = 'answer/answer_edit.html'
 
-    @login_required
     def get_queryset(self):
         queryset = super(AnswerEdit, self).get_queryset()
         queryset = queryset.filter(author=self.request.user)
@@ -50,13 +50,12 @@ class AnswerEdit(UpdateView):
 
 class AnswerCreate(CreateView):
 
-    @login_required
     def dispatch(self, request, *args, **kwargs):
         # if user auth
         return super(AnswerCreate, self).dispatch(request, *args, **kwargs)
 
     model = Answer
-    fields = 'content'
+    fields = 'content', 'question'
     context_object_name = 'answer'
     template_name = 'answers/answer_create.html'
 
@@ -72,7 +71,8 @@ class AnswerCreate(CreateView):
             answer = form.save(commit=False)
             answer.author = request.user
             answer.save()
-            return redirect('answers:answer_details', question_id=answer.pk)
+            # return redirect('answers:answer_details', answer_id=answer.pk)
+            return redirect('questions:questions')
         else:
             return render(request, 'answers/answer_create.html', {'form': form})
 

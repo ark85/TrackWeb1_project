@@ -2,15 +2,18 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.shortcuts import render, get_object_or_404, reverse, redirect, HttpResponse
 from models import Question
-from django.views.generic import UpdateView, CreateView
+from django.views.generic import UpdateView, CreateView, View
 from forms import QuestionViewsForm
 
 
 def question_details(request, question_id):
+    question = get_object_or_404(Question, id=question_id)
+
     context = {
-        'question': get_object_or_404(Question, id=question_id)
+        'question': question,
+        'answers': question.answers.all().filter(is_archive=False)
     }
 
     return render(request, "questions/question_details.html", context)
@@ -80,3 +83,14 @@ class QuestionCreate(CreateView):
 
     def get_success_url(self):
         return reverse('questions:question_details', kwargs={'question_id': self.object.pk})
+
+
+class QuestionLikesCount(View):
+    question = None
+
+    def dispatch(self, request, pk=None, *args, **kwargs):
+        self.question = get_object_or_404(Question, pk=pk)
+        return super(QuestionLikesCount, self).dispatch(request, *args, **kwargs)
+
+    def get(self, request):
+        return HttpResponse(self.question.likes.count())

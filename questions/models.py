@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from django.db import models
 from django.conf import settings
 from categories.models import Category
-from answers.models import Answer
 
 class Question(models.Model):
 
@@ -27,12 +26,6 @@ class Question(models.Model):
         blank=True,
         related_name='questions',
         verbose_name='Question\'s categories'
-    )
-    answers = models.ManyToManyField(
-        Answer,
-        related_name='answers',
-        blank=True,
-        verbose_name="Question\'s answers"
     )
     likes = models.ManyToManyField(
         settings.AUTH_USER_MODEL,

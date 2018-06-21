@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.conf import settings
 
+from questions.models import Question
+
 # Create your models here.
 
 # -*- coding: utf-8 -*-
@@ -23,6 +25,11 @@ class Answer(models.Model):
         settings.AUTH_USER_MODEL,
         blank=True,
         related_name="answer_likes"
+    )
+    question = models.ForeignKey(
+        Question,
+        related_name='answers',
+        verbose_name='Answer\'s question'
     )
     is_archive = models.BooleanField(
         default=False,

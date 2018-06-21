@@ -21,6 +21,7 @@ urlpatterns = [
 
     url(r'^categories/', include('categories.urls', namespace='categories')),
     url(r'^questions/', include('questions.urls', namespace='questions')),
+    url(r'^answers/', include('answers.urls', namespace='answers')),
 
     url(r'', include('core.urls', namespace='core'))
 ]

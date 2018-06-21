@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import render, get_object_or_404, redirect, reverse, HttpResponse
 from models import Category
 from forms import CategoryViewsForm, CategoryForm
 from django.views.generic import UpdateView
@@ -70,3 +70,7 @@ class CategoryEdit(UpdateView):
 
     def get_success_url(self):
         return reverse('categories:category_details', kwargs={'category_id': self.object.pk})
+
+    def form_valid(self, form):
+        response = super(CategoryEdit, self).form_valid(form)
+        return HttpResponse('valid')
